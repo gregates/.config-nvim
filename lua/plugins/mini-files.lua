@@ -12,7 +12,7 @@ return {
     {
       "<leader>F",
       function()
-        require("mini.files").open(vim.un.cwd(), true)
+        require("mini.files").open(vim.uv.cwd(), true)
       end,
       desc = "Browse @cwd",
     },

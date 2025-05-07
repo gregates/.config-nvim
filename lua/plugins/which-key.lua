@@ -33,6 +33,7 @@ return {
     },
   },
   keys = {
+    --[[
      {
       "<leader>?",
       function()
@@ -40,6 +41,7 @@ return {
       end,
       desc = "Buffer Local Keymaps (which-key)",
     },
+    ]]--
   },
 }
 
