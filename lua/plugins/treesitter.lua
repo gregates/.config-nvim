@@ -1,0 +1,52 @@
+return {
+  "nvim-treesitter/nvim-treesitter",
+  version = false,
+  build = ":TSUpdate",
+  event = { "VeryLazy" },
+  lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+  opts_extend = { "ensure_installed" },
+  ---@type TSConfig
+  ---@diagnostic disable-next-line: missing-fields
+  opts = {
+    highlight = { enable = true },
+    indent = { enable = true },
+    ensure_installed = {
+      'bash',
+      'c',
+      'diff',
+      'html',
+      'javascript',
+      'jsdoc',
+      'json',
+      'jsonc',
+      'lua',
+      'luadoc',
+      'luap',
+      'markdown',
+      'markdown_inline',
+      'printf',
+      'python',
+      'query',
+      'regex',
+      'ruby',
+      'rust',
+      'toml',
+      'tsx',
+      'typescript',
+      'vim',
+      'vimdoc',
+      'xml',
+      'yaml',
+    },
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<space>",
+      node_incremental = "n",
+      scope_incremental = "c",
+      node_decremental = "b",
+    },
+  },
+}
