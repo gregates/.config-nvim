@@ -22,8 +22,9 @@ return {
         { "<left>", "<c-o>", desc = "Jump back" },
         { "<right>", "<tab>", desc = "Jump forward" },
         { [[\]], "<cmd>Telescope live_grep<cr>", desc = "grep" },
-        { "<leader>e", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+        { "<leader>a", "<cmd>Telescope find_files<cr>", desc = "Find files" },
         { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Find buffers" },
+        { "<leader>e", vim.diagnostic.open_float, desc = "Show diagnostic" },
         { "g", group = "goto" },
         { "z", group = "fold" },
         { "<leader>w", group = "windows", expand = function()
