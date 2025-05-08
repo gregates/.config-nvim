@@ -22,7 +22,7 @@ return {
           vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "signature help" })
           vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, { buffer = ev.buf, desc = "type definition" })
           vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { buffer = ev.buf, desc = "rename" })
-          vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { buffer = ev.buf, desc = "code action" })
+          -- vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { buffer = ev.buf, desc = "code action" })
         end,
       })
 

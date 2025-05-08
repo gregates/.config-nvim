@@ -16,14 +16,16 @@ return {
         { "<leader>l", "<c-w>l", desc = "Window right" },
         { "<leader>k", "<c-w>k", desc = "Window up" },
         { "<leader>j", "<c-w>j", desc = "Window down" },
-        { "<leader>q", "<c-w>q", desc = "Window close" },
+        { "<leader>q", "<c-w>q", desc = "Close this window" },
         { "<leader>v", "<c-w>v<c-w>w", desc = "Split vertical" },
+        { "<leader>o", "<c-w>o", desc = "Close other windows" },
+        { "<left>", "<c-o>", desc = "Jump back" },
+        { "<right>", "<tab>", desc = "Jump forward" },
+        { [[\]], "<cmd>Telescope live_grep<cr>", desc = "grep" },
+        { "<leader>e", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+        { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Find buffers" },
         { "g", group = "goto" },
         { "z", group = "fold" },
-        { "<leader>b", group = "buffers", expand = function()
-            return require("which-key.extras").expand.buf()
-          end
-        },
         { "<leader>w", group = "windows", expand = function()
             return require("which-key.extras").expand.win()
           end,
