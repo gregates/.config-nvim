@@ -37,14 +37,6 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- basic appearance
-require('tokyonight').setup({
-  style = 'moon',
-  styles = {
-    comments = { italic = false },
-    keywords = { italic = false },
-  }
-})
-vim.cmd.colorscheme('tokyonight')
 vim.o.number = false
 vim.o.colorcolumn = '81'
 vim.o.linespace = 1
@@ -92,3 +84,5 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
+
+vim.cmd.colorscheme("tokyonight")
