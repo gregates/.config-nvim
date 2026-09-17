@@ -41,6 +41,9 @@ vim.o.number = false
 vim.o.colorcolumn = '81'
 vim.o.linespace = 1
 
+-- status line
+vim.o.laststatus = 3
+
 -- tabs and spaces
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
