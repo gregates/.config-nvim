@@ -1,17 +1,17 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  version = false,
+  branch = "main",
+  lazy = false, -- the main branch does not support lazy-loading
   build = ":TSUpdate",
-  event = { "VeryLazy" },
-  lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-  opts_extend = { "ensure_installed" },
-  ---@type TSConfig
-  ---@diagnostic disable-next-line: missing-fields
-  opts = {
-    highlight = { enable = true },
-    indent = { enable = true },
-    ensure_installed = {
+  config = function()
+    -- Parsers are compiled locally with the tree-sitter CLI and a C compiler.
+    -- Already-installed parsers are skipped.
+    local install = require("nvim-treesitter").install
+    if vim.fn.executable("tree-sitter") == 0 then
+      vim.notify("nvim-treesitter: tree-sitter CLI not found, not installing parsers", vim.log.levels.WARN)
+      install = function() end
+    end
+    install({
       'bash',
       'c',
       'diff',
@@ -19,7 +19,6 @@ return {
       'javascript',
       'jsdoc',
       'json',
-      'jsonc',
       'lua',
       'luadoc',
       'luap',
@@ -38,15 +37,26 @@ return {
       'vimdoc',
       'xml',
       'yaml',
-    },
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "<space>",
-      node_incremental = "n",
-      scope_incremental = "c",
-      node_decremental = "b",
-    },
-  },
+    })
+
+    -- The plugin only installs parsers and queries; turning features on is up to us.
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("UserTreesitter", {}),
+      callback = function(ev)
+        -- fails when there is no parser for this filetype
+        if not pcall(vim.treesitter.start, ev.buf) then
+          return
+        end
+        local lang = vim.treesitter.language.get_lang(ev.match)
+        if lang and vim.treesitter.query.get(lang, "indents") then
+          vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end,
+    })
+
+    -- Incremental selection is built into nvim now, as an/in in visual mode.
+    vim.keymap.set("n", "<space>", "van", { remap = true, desc = "Select treesitter node" })
+    vim.keymap.set("x", "<space>", "an", { remap = true, desc = "Expand selection to parent node" })
+    vim.keymap.set("x", "<BS>", "in", { remap = true, desc = "Shrink selection to child node" })
+  end,
 }

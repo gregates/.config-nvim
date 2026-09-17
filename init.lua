@@ -54,7 +54,7 @@ vim.o.fixendofline = false
 
 -- use treesitter for folding
 vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldenable = false
 
 -- filetype specific settings
